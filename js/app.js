@@ -46,12 +46,54 @@ class Bd {
       if (despesa === null) {
         continue;
       }
+      despesa.id = i;
       despesas.push(despesa);
     }
     return despesas;
   }
   pesquisar(despesa) {
-    console.log(despesa);
+    let despesasFiltradas = Array();
+    despesasFiltradas = this.recuperarTodosRegistros();
+    //filtro de ano
+    if (despesa.ano != "") {
+      console.log("filtro de ano");
+      despesasFiltradas = despesasFiltradas.filter((d) => d.ano == despesa.ano);
+    }
+    //filtro de mes
+    if (despesa.mes != "") {
+      console.log("filtro de mes");
+      despesasFiltradas = despesasFiltradas.filter((d) => d.mes == despesa.mes);
+    }
+    //filtro de dia
+    if (despesa.dia != "") {
+      console.log("filtro de dia");
+      despesasFiltradas = despesasFiltradas.filter((d) => d.dia == despesa.dia);
+    }
+    //filtro de tipo
+    if (despesa.tipo != "") {
+      console.log("filtro de tipo");
+      despesasFiltradas = despesasFiltradas.filter(
+        (d) => d.tipo == despesa.tipo
+      );
+    }
+    //filtro de descricao
+    if (despesa.descricao != "") {
+      console.log("filtro de descricao");
+      despesasFiltradas = despesasFiltradas.filter(
+        (d) => d.descricao == despesa.descricao
+      );
+    }
+    //filtro de valor
+    if (despesa.valor != "") {
+      console.log("filtro de valor");
+      despesasFiltradas = despesasFiltradas.filter(
+        (d) => d.valor == despesa.valor
+      );
+    }
+    return despesasFiltradas;
+  }
+  remover(id) {
+    localStorage.removeItem(id);
   }
 }
 
@@ -102,11 +144,13 @@ function cadastrarDespesa() {
     $("#modalRegistraDespesa").modal("show");
   }
 }
-function carregaListaDespesas() {
-  let despesas = [];
-  despesas = bd.recuperarTodosRegistros();
+function carregaListaDespesas(despesas = Array(), filtro = false) {
+  if (despesas.length == 0 && filtro == false) {
+    despesas = bd.recuperarTodosRegistros();
+  }
   //selecionando o elemento tbody da tabela
   let listaDespesas = document.getElementById("listaDespesas");
+  listaDespesas.innerHTML = "";
   //percorrer o array despesas, listando cada despesa de forma dinamica
   despesas.forEach(function (d) {
     //criando a linha (tr)
@@ -198,6 +242,17 @@ function carregaListaDespesas() {
     linha.insertCell(1).innerHTML = d.tipo;
     linha.insertCell(2).innerHTML = d.descricao;
     linha.insertCell(3).innerHTML = d.valor;
+    //criar o botão de exclusão
+    let btn = document.createElement("button");
+    btn.className = "btn btn-danger";
+    btn.innerHTML = '<i class="fas fa-times"></i>';
+    btn.id = `id_despesa_${d.id}`;
+    btn.onclick = function () {
+      //remover a despesa
+      bd.remover(d.id);
+      window.location.reload();
+    };
+    linha.insertCell(4).append(btn);
   });
 }
 function pesquisarDespesa() {
@@ -208,5 +263,7 @@ function pesquisarDespesa() {
   let descricao = document.getElementById("descricao").value;
   let valor = document.getElementById("valor").value;
   let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor);
-  bd.pesquisar(despesa);
+  let despesas = bd.pesquisar(despesa);
+
+  carregaListaDespesas(despesas, true);
 }
