@@ -92,9 +92,19 @@
         </select>
       </div>
 
-      <div class="col-md-2">
-        <input type="number" class="form-control" placeholder="Dia" id="dia" />
+ <div class="col-md-2">
+        <input type="number" class="form-control" placeholder="Dia" id="dia" max="31" step="1" />
       </div>
+      
+      <script>
+        const inputDia = document.getElementById('dia');
+        
+        inputDia.addEventListener('input', function() {
+          if (parseInt(this.value) > 31) {
+            this.value = '31';
+          }
+        });
+      </script>
 
       <div class="col-md-6">
         <select class="form-control" id="tipo">
