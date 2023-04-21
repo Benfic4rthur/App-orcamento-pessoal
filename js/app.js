@@ -137,8 +137,27 @@ function cadastrarDespesa() {
       "modal-header text-danger";
     document.getElementById("modal_titulo").innerHTML =
       "Erro na inclusão do registro";
-    document.getElementById("modal_conteudo").innerHTML =
-      "Existem campos obrigatórios que não foram preenchidos.";
+    if (
+      ano.value == "" ||
+      mes.value == "" ||
+      dia.value == "" ||
+      tipo.value == "" ||
+      descricao.value == "" ||
+      valor.value == ""
+    ) {
+      document.getElementById(
+        "modal_conteudo"
+      ).innerHTML = `Por favor verifique os campos: ${
+        ano.value == "" ? "<h6>Ano</h6>" : ""
+      } ${mes.value == "" ? "<h6>Mês</h6>" : ""} ${
+        dia.value == "" ? "<h6>Dia</h6> " : ""
+      } ${tipo.value == "" ? "<h6>Tipo</h6>" : ""} ${
+        descricao.value == "" ? "<h6>Descrição</h6>" : ""
+      } ${valor.value == "" ? "<h6>Valor</h6>" : ""}`;
+    } else {
+      document.getElementById("modal_conteudo").innerHTML =
+        "Existem campos que não foram preenchidos corretamente.";
+    }
     document.getElementById("modal_botao").innerHTML = "Voltar e corrigir";
     document.getElementById("modal_botao").className = "btn btn-danger";
     $("#modalRegistraDespesa").modal("show");
@@ -248,10 +267,27 @@ function carregaListaDespesas(despesas = Array(), filtro = false) {
     btn.innerHTML = '<i class="fas fa-times"></i>';
     btn.id = `id_despesa_${d.id}`;
     btn.onclick = function () {
-      //remover a despesa
-      bd.remover(d.id);
-      window.location.reload();
+      document.getElementById("modal_titulo_div").className =
+        "modal-header text-danger";
+      document.getElementById("modal_titulo").innerHTML =
+        "Exclusão de registro";
+      document.getElementById(
+        "modal_conteudo"
+      ).innerHTML = `Deseja excluir o registro <b>${d.descricao}</b> no valor de R$:<b>${d.valor}</b>?`;
+      document.getElementById("modal_botao1").innerHTML = "Sim";
+      document.getElementById("modal_botao1").className = "btn btn-danger";
+      document.getElementById("modal_botao2").innerHTML = "Não";
+      document.getElementById("modal_botao2").className = "btn btn-danger";
+      $("#modalApagaRegistro").modal("show");
+
+      // Adiciona event listener para o botão "Voltar"
+      document
+        .getElementById("modal_botao1")
+        .addEventListener("click", function () {
+          bd.remover(d.id);
+        });
     };
+
     linha.insertCell(4).append(btn);
   });
 }
