@@ -132,35 +132,94 @@ function cadastrarDespesa() {
     tipo.value = "";
     descricao.value = "";
     valor.value = "";
+    ano.style.borderColor = "";
+    ano.placeholder = "Ano";
+    ano.style.color = ""
+    mes.style.borderColor = "";
+    mes.placeholder = "Mês";
+    mes.style.color = ""
+    dia.style.borderColor = "";
+    dia.placeholder = "Dia";
+    dia.style.color = ""
+    tipo.style.borderColor = "";
+    tipo.placeholder = "Tipo";
+    tipo.style.color = ""
+    descricao.style.borderColor = "";
+    descricao.placeholder = "Descrição";
+    descricao.style.color = ""
+    valor.style.borderColor = "";
+    valor.placeholder = "Valor";
+    valor.style.color = ""
   } else {
-    document.getElementById("modal_titulo_div").className =
-      "modal-header text-danger";
-    document.getElementById("modal_titulo").innerHTML =
-      "Erro na inclusão do registro";
     if (
       ano.value == "" ||
       mes.value == "" ||
       dia.value == "" ||
       tipo.value == "" ||
       descricao.value == "" ||
-      valor.value == ""
+      valor.value == "" 
     ) {
-      document.getElementById(
-        "modal_conteudo"
-      ).innerHTML = `Por favor verifique os campos abaixo: ${
-        ano.value == "" ? "<h6>Ano</h6>" : ""
-      } ${mes.value == "" ? "<h6>Mês</h6>" : ""} ${
-        dia.value == "" ? "<h6>Dia</h6> " : ""
-      } ${tipo.value == "" ? "<h6>Tipo</h6>" : ""} ${
-        descricao.value == "" ? "<h6>Descrição</h6>" : ""
-      } ${valor.value == "" ? "<h6>Valor</h6>" : ""}`;
-    } else {
-      document.getElementById("modal_conteudo").innerHTML =
-        "Existem campos que não foram preenchidos corretamente.";
+      //deixando os campos não preenchidos em vermelho
+      if (ano.value == "" || ano.value == null) {
+        ano.style.borderColor = "red";
+        ano.style.borderWidth = "2px";
+        ano.style.color = "red";
+        document.getElementById("ano").focus();        
+      } else if (ano.value != "" || ano.value != null){
+        ano.style.borderColor = "";
+        ano.style.borderWidth = "1px";
+        ano.style.color = "";
+        document.getElementById("mes").focus(); 
+      }
+      if (mes.value == "" || mes.value == null) {
+        mes.style.borderColor = "red";
+        mes.style.borderWidth = "2px";
+        mes.style.color = "red";
+      } else if (mes.value != "" || mes.value != null){
+        mes.style.borderColor = "";
+        mes.style.borderWidth = "1px";
+        mes.style.color = "";
+        document.getElementById("dia").focus(); 
+      } if (dia.value == "" || dia.value == null) {
+        dia.style.borderColor = "red";
+        dia.style.borderWidth = "2px";
+        dia.placeholder = "Campo Obrigatorio";
+      } else if (dia.value != "" || dia.value != null){
+        dia.style.borderColor = "";
+        dia.style.borderWidth = "1px";
+        dia.style.color = "";
+        document.getElementById("tipo").focus(); 
+      }
+      if (tipo.value == "" || tipo.value == null) {
+        tipo.style.borderColor = "red";
+        tipo.style.borderWidth = "2px";
+        tipo.style.color = "red";
+      } else if (tipo.value != "" || tipo.value != null){
+        tipo.style.borderColor = "";
+        tipo.style.borderWidth = "1px";
+        tipo.style.color = "";
+        document.getElementById("descricao").focus(); 
+      }
+      if (descricao.value == "" || descricao.value == null) {
+        descricao.style.borderColor = "red";
+        descricao.style.borderWidth = "2px";
+        descricao.placeholder = "Campo Obrigatório";
+      } else if (descricao.value != "" || descricao.value != null){
+        descricao.style.borderColor = "";
+        descricao.style.borderWidth = "1px";
+        descricao.style.color = "";
+        document.getElementById("valor").focus(); 
+      }
+      if (valor.value == "" || valor.value == null) {
+        valor.style.borderColor = "red";
+        valor.style.borderWidth = "2px";
+        valor.placeholder = "Campo Obrigatório";
+      } else if (valor.value != "" || valor.value != null){
+        valor.style.borderColor = "";
+        valor.style.borderWidth = "1px";
+        valor.style.color = "";
+      }
     }
-    document.getElementById("modal_botao").innerHTML = "Voltar e corrigir";
-    document.getElementById("modal_botao").className = "btn btn-danger";
-    $("#modalRegistraDespesa").modal("show");
   }
 }
 function carregaListaDespesas(despesas = Array(), filtro = false) {
