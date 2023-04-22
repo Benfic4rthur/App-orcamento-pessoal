@@ -135,21 +135,28 @@ function cadastrarDespesa() {
     ano.style.borderColor = "";
     ano.placeholder = "Ano";
     ano.style.color = ""
+    document.getElementById("ano").className = "form-control";
     mes.style.borderColor = "";
     mes.placeholder = "Mês";
     mes.style.color = ""
+    document.getElementById("mes").className = "form-control";
     dia.style.borderColor = "";
     dia.placeholder = "Dia";
     dia.style.color = ""
+    document.getElementById("dia").className = "form-control";
     tipo.style.borderColor = "";
     tipo.placeholder = "Tipo";
     tipo.style.color = ""
+    document.getElementById("tipo").className = "form-control";
     descricao.style.borderColor = "";
     descricao.placeholder = "Descrição";
     descricao.style.color = ""
+    document.getElementById("descricao").className = "form-control mt-4";
     valor.style.borderColor = "";
     valor.placeholder = "Valor";
     valor.style.color = ""
+    document.getElementById("valor").className = "form-control mt-4";
+    document.getElementById("botao").className = "btn btn-primary mt-4";
   } else {
     if (
       ano.value == "" ||
@@ -164,60 +171,78 @@ function cadastrarDespesa() {
         ano.style.borderColor = "red";
         ano.style.borderWidth = "2px";
         ano.style.color = "red";
-        document.getElementById("ano").focus();        
+        document.getElementById("ano").focus(); 
+        document.getElementById("ano").className = "form-control is-invalid";
+        document.getElementById("botao").className = "btn btn-primary";
       } else if (ano.value != "" || ano.value != null){
         ano.style.borderColor = "";
         ano.style.borderWidth = "1px";
         ano.style.color = "";
+        document.getElementById("ano").className = "form-control mb-4";
         document.getElementById("mes").focus(); 
       }
       if (mes.value == "" || mes.value == null) {
         mes.style.borderColor = "red";
         mes.style.borderWidth = "2px";
         mes.style.color = "red";
+        document.getElementById("mes").className = "form-control is-invalid";
+        document.getElementById("botao").className = "btn btn-primary";
       } else if (mes.value != "" || mes.value != null){
         mes.style.borderColor = "";
         mes.style.borderWidth = "1px";
         mes.style.color = "";
+        document.getElementById("mes").className = "form-control mb-4";
         document.getElementById("dia").focus(); 
       } if (dia.value == "" || dia.value == null) {
         dia.style.borderColor = "red";
         dia.style.borderWidth = "2px";
         dia.placeholder = "Campo Obrigatorio";
+        document.getElementById("dia").className = "form-control is-invalid";
+        document.getElementById("botao").className = "btn btn-primary";
       } else if (dia.value != "" || dia.value != null){
         dia.style.borderColor = "";
         dia.style.borderWidth = "1px";
         dia.style.color = "";
+        document.getElementById("dia").className = "form-control mb-4";
         document.getElementById("tipo").focus(); 
       }
       if (tipo.value == "" || tipo.value == null) {
         tipo.style.borderColor = "red";
         tipo.style.borderWidth = "2px";
         tipo.style.color = "red";
+        document.getElementById("tipo").className = "form-control is-invalid";
+        document.getElementById("botao").className = "btn btn-primary";
       } else if (tipo.value != "" || tipo.value != null){
         tipo.style.borderColor = "";
         tipo.style.borderWidth = "1px";
         tipo.style.color = "";
+        document.getElementById("tipo").className = "form-control mb-4";
         document.getElementById("descricao").focus(); 
       }
       if (descricao.value == "" || descricao.value == null) {
         descricao.style.borderColor = "red";
         descricao.style.borderWidth = "2px";
         descricao.placeholder = "Campo Obrigatório";
+        document.getElementById("descricao").className = "form-control is-invalid";
+        document.getElementById("botao").className = "btn btn-primary";
       } else if (descricao.value != "" || descricao.value != null){
         descricao.style.borderColor = "";
         descricao.style.borderWidth = "1px";
         descricao.style.color = "";
+        document.getElementById("descricao").className = "form-control";
         document.getElementById("valor").focus(); 
       }
       if (valor.value == "" || valor.value == null) {
         valor.style.borderColor = "red";
         valor.style.borderWidth = "2px";
         valor.placeholder = "Campo Obrigatório";
+        document.getElementById("valor").className = "form-control is-invalid";
+        document.getElementById("botao").className = "btn btn-primary";
       } else if (valor.value != "" || valor.value != null){
         valor.style.borderColor = "";
         valor.style.borderWidth = "1px";
         valor.style.color = "";
+        document.getElementById("valor").className = "form-control";
       }
     }
   }
